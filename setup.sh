@@ -1,10 +1,10 @@
 sourceconda
 
-conda create -n sae-exeriments python=3.10
+conda create -n sae-experiments python=3.10
 
 conda activate sae-experiments
 
-git clone https://github.com/DanielKerrigan/saefarer.git
+export SKIP_JUPYTER_BUILDER=1
 
-pip install -e saefarer
+pip install -e ../saefarer
 

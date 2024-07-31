@@ -18,35 +18,41 @@ def main(root_dir):
         dtype="float32",
         # dataset
         is_dataset_tokenized=True,
+        prepend_bos_token=True,
         dataset_column="input_ids",
         # dimensions
-        d_sae=512,
-        d_in=128,
+        d_sae=256,
+        d_in=64,
         # loss functions
         k=4,
-        aux_k=64,
+        aux_k=32,
         aux_k_coef=1 / 32,
         dead_tokens_threshold=10_000_000,
         hidden_state_index=7,
         normalize=False,
         # batch sizes
-        model_sequence_length=128,
+        model_sequence_length=256,
         model_batch_size_sequences=32,
         n_batches_in_store=64,
         sae_batch_size_tokens=4096,
-        # tokenization
-        prepend_bos_token=True,
         # adam
         lr=3e-4,
         beta1=0.9,
         beta2=0.999,
         eps=6.25e-10,
         # training
-        total_training_tokens=100_000_000,
+        total_training_tokens=200_000_000,
+        # logging
+        logger="wandb",
+        log_batch_freq=500,
+        wandb_project="saefarer",
+        wandb_group="TinyStories-1M_sequence-length",
+        wandb_name="256",
+        wandb_notes="Comparing execution time for 128 vs. 256 seq len.",
     )
 
     model = AutoModelForCausalLM.from_pretrained(
-        root_dir / "models/roneneldan/TinyStories-3M"
+        root_dir / "models/roneneldan/TinyStories-1M"
     )
     model.to(cfg.device)
 
@@ -55,10 +61,10 @@ def main(root_dir):
     )
 
     dataset = load_from_disk(
-        (root_dir / "datasets/roneneldan/TinyStories_tokenized_128").as_posix()
+        (root_dir / "datasets/roneneldan/TinyStories_tokenized_256").as_posix()
     )
 
-    output_dir = root_dir / "saes/roneneldan/TinyStories-3M/back"
+    output_dir = root_dir / "saes/roneneldan/TinyStories-1M/sequence-length/256"
     output_dir.mkdir(parents=True, exist_ok=True)
 
     train(
@@ -66,9 +72,8 @@ def main(root_dir):
         model=model,
         tokenizer=tokenizer,
         dataset=dataset,
-        log_batch_freq=1000,
         save_path=output_dir / "sae.pt",
-        log_path=output_dir / "logs.json",
+        log_path=output_dir,
     )
 
 

@@ -21,8 +21,8 @@ def main(root_dir):
         prepend_bos_token=True,
         dataset_column="input_ids",
         # dimensions
-        d_sae=256,
         d_in=64,
+        expansion_factor=4,
         # loss functions
         k=4,
         aux_k=32,

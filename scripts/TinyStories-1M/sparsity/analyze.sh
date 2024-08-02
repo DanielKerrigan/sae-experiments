@@ -7,7 +7,7 @@
 #SBATCH --ntasks=1
 #SBATCH --output=/scratch/kerrigan.d/mi/sae-experiments/output/TinyStories-1M_k_analyze_%A_%a.out
 #SBATCH --error=/scratch/kerrigan.d/mi/sae-experiments/output/TinyStories-1M_k_analyze_%A_%a.err
-#SBATCH --array=1,4,16,32
+#SBATCH --array=1,4,8,16,32
 
 source /home/kerrigan.d/miniconda3/bin/activate
 conda activate sae-experiments

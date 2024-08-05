@@ -8,7 +8,7 @@ from transformers import AutoModelForCausalLM, AutoTokenizer
 from datasets import load_from_disk
 
 
-def main(root_dir):
+def main(root_dir, seq_len):
     """Train the SAE"""
 
     root_dir = Path(root_dir)
@@ -31,7 +31,7 @@ def main(root_dir):
         hidden_state_index=7,
         normalize=False,
         # batch sizes
-        model_sequence_length=128,
+        model_sequence_length=seq_len,
         model_batch_size_sequences=32,
         n_batches_in_store=64,
         sae_batch_size_tokens=4096,
@@ -47,7 +47,7 @@ def main(root_dir):
         log_batch_freq=500,
         wandb_project="saefarer",
         wandb_group="TinyStories-1M_sequence-length",
-        wandb_name="128",
+        wandb_name=f"{seq_len}",
         wandb_notes="Comparing execution time for 128 vs. 256 seq len.",
     )
 
@@ -61,10 +61,10 @@ def main(root_dir):
     )
 
     dataset = load_from_disk(
-        (root_dir / "datasets/roneneldan/TinyStories_tokenized_128").as_posix()
+        (root_dir / f"datasets/roneneldan/TinyStories_tokenized_{seq_len}").as_posix()
     )
 
-    output_dir = root_dir / "saes/roneneldan/TinyStories-1M/sequence-length/128"
+    output_dir = root_dir / f"saes/roneneldan/TinyStories-1M/sequence-length/{seq_len}"
     output_dir.mkdir(parents=True, exist_ok=True)
 
     train(
@@ -79,6 +79,7 @@ def main(root_dir):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
+    parser.add_argument("-l", "--length", help="sequence length", type=int)
     parser.add_argument(
         "-p",
         "--path",
@@ -87,4 +88,4 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
 
-    main(args.path)
+    main(args.path, args.length)

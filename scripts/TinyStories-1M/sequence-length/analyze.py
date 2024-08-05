@@ -9,7 +9,7 @@ from transformers import AutoModelForCausalLM, AutoTokenizer
 from datasets import load_from_disk
 
 
-def main(root_dir):
+def main(root_dir, seq_len):
     """Analyze the SAE"""
 
     root_dir = Path(root_dir)
@@ -26,16 +26,17 @@ def main(root_dir):
     )
 
     sae = SAE.load(
-        root_dir / "saes/roneneldan/TinyStories-1M/sequence-length/256/sae.pt", DEVICE
+        root_dir / f"saes/roneneldan/TinyStories-1M/sequence-length/{seq_len}/sae.pt",
+        DEVICE,
     )
 
     output_dir = (
-        root_dir / "saes/roneneldan/TinyStories-1M/sequence-length/256/analysis"
+        root_dir / f"saes/roneneldan/TinyStories-1M/sequence-length/{seq_len}/analysis"
     )
     output_dir.mkdir(parents=True, exist_ok=True)
 
     dataset = load_from_disk(
-        (root_dir / "datasets/roneneldan/TinyStories_tokenized_256").as_posix()
+        (root_dir / f"datasets/roneneldan/TinyStories_tokenized_{seq_len}").as_posix()
     )
 
     n_analysis_tokens = 10_000_000
@@ -57,6 +58,7 @@ def main(root_dir):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
+    parser.add_argument("-l", "--length", help="sequence length", type=int)
     parser.add_argument(
         "-p",
         "--path",
@@ -65,4 +67,4 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
 
-    main(args.path)
+    main(args.path, args.length)

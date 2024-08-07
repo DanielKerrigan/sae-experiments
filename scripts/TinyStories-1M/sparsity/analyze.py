@@ -37,7 +37,7 @@ def main(root_dir, k):
     )
 
     n_analysis_tokens = 10_000_000
-    n_analysis_sequences = n_analysis_tokens // sae.cfg.model_batch_size_sequences
+    n_analysis_sequences = n_analysis_tokens // sae.cfg.model_sequence_length
     tokens: torch.Tensor = dataset.shuffle()["input_ids"][0:n_analysis_sequences]  # type: ignore
     tokens = tokens.to(DEVICE)
 
@@ -47,7 +47,7 @@ def main(root_dir, k):
         tokenizer=tokenizer,
         tokens=tokens,
         feature_indices=list(range(sae.cfg.d_sae)),
-        feature_batch_size=64,
+        feature_batch_size=256,
         cfg=sae.cfg,
         output_dir=output_dir,
     )

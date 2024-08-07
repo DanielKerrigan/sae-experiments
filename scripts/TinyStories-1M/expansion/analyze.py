@@ -2,7 +2,7 @@ import argparse
 from pathlib import Path
 
 import torch
-from saefarer.analyze import analyze_sae
+from saefarer.analyzing import analyze
 from saefarer.model import SAE
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
@@ -42,16 +42,17 @@ def main(root_dir, expansion_factor):
     )
 
     n_analysis_tokens = 10_000_000
-    n_analysis_sequences = n_analysis_tokens // sae.cfg.model_batch_size_sequences
+    n_analysis_sequences = n_analysis_tokens // sae.cfg.model_sequence_length
     tokens: torch.Tensor = dataset.shuffle()["input_ids"][0:n_analysis_sequences]  # type: ignore
     tokens = tokens.to(DEVICE)
 
-    analyze_sae(
+    analyze(
         sae=sae,
         model=model,
         tokenizer=tokenizer,
         tokens=tokens,
         feature_indices=list(range(sae.cfg.d_sae)),
+        feature_batch_size=256,
         cfg=sae.cfg,
         output_dir=output_dir,
     )

@@ -1,8 +1,8 @@
 import argparse
 from pathlib import Path
 
-import torch
 from saefarer.analyzing import analyze
+from saefarer.config import AnalysisConfig
 from saefarer.model import SAE
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
@@ -14,12 +14,21 @@ def main(root_dir, seq_len):
 
     root_dir = Path(root_dir)
 
-    DEVICE = "cuda"
+    cfg = AnalysisConfig(
+        device="cuda",
+        dataset_column="input_ids",
+        model_batch_size_sequences=32,
+        model_sequence_length=seq_len,
+        feature_batch_size=256,
+        total_analysis_tokens=10_000_000,
+        feature_indices=[],
+        n_example_sequences=10,
+        n_context_tokens=5,
+    )
 
     model = AutoModelForCausalLM.from_pretrained(
         root_dir / "models/roneneldan/TinyStories-1M"
     )
-    model.to(DEVICE)
 
     tokenizer = AutoTokenizer.from_pretrained(
         root_dir / "models/EleutherAI/gpt-neo-125M"
@@ -27,7 +36,7 @@ def main(root_dir, seq_len):
 
     sae = SAE.load(
         root_dir / f"saes/roneneldan/TinyStories-1M/sequence-length/{seq_len}/sae.pt",
-        DEVICE,
+        cfg.device,
     )
 
     output_dir = (
@@ -39,20 +48,13 @@ def main(root_dir, seq_len):
         (root_dir / f"datasets/roneneldan/TinyStories_tokenized_{seq_len}").as_posix()
     )
 
-    n_analysis_tokens = 10_000_000
-    n_analysis_sequences = n_analysis_tokens // sae.cfg.model_sequence_length
-    tokens: torch.Tensor = dataset.shuffle()["input_ids"][0:n_analysis_sequences]  # type: ignore
-    tokens = tokens.to(DEVICE)
-
     analyze(
-        sae=sae,
+        cfg=cfg,
         model=model,
-        tokenizer=tokenizer,
-        tokens=tokens,
-        feature_indices=list(range(sae.cfg.d_sae)),
-        feature_batch_size=256,
-        cfg=sae.cfg,
-        output_dir=output_dir,
+        dataset=dataset,  # type: ignore
+        sae=sae,
+        decode_fn=tokenizer.batch_decode,  # type: ignore
+        output_path=output_dir / "analysis.db",
     )
 
 

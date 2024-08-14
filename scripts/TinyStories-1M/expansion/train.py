@@ -1,9 +1,9 @@
 import argparse
 from pathlib import Path
 
-from saefarer.config import Config
+from saefarer.config import TrainingConfig
 from saefarer.training import train
-from transformers import AutoModelForCausalLM, AutoTokenizer
+from transformers import AutoModelForCausalLM
 
 from datasets import load_from_disk
 
@@ -13,12 +13,10 @@ def main(root_dir, expansion_factor):
 
     root_dir = Path(root_dir)
 
-    cfg = Config(
+    cfg = TrainingConfig(
         device="cuda",
         dtype="float32",
         # dataset
-        is_dataset_tokenized=True,
-        prepend_bos_token=True,
         dataset_column="input_ids",
         # dimensions
         d_in=64,
@@ -56,10 +54,6 @@ def main(root_dir, expansion_factor):
     )
     model.to(cfg.device)
 
-    tokenizer = AutoTokenizer.from_pretrained(
-        root_dir / "models/EleutherAI/gpt-neo-125M"
-    )
-
     dataset = load_from_disk(
         (root_dir / "datasets/roneneldan/TinyStories_tokenized_128").as_posix()
     )
@@ -72,8 +66,7 @@ def main(root_dir, expansion_factor):
     train(
         cfg=cfg,
         model=model,
-        tokenizer=tokenizer,
-        dataset=dataset,
+        dataset=dataset,  # type: ignore
         save_path=output_dir / "sae.pt",
         log_path=output_dir,
     )

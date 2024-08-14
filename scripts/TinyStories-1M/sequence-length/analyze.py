@@ -39,10 +39,10 @@ def main(root_dir, seq_len):
         cfg.device,
     )
 
-    output_dir = (
-        root_dir / f"saes/roneneldan/TinyStories-1M/sequence-length/{seq_len}/analysis"
+    output_path = (
+        root_dir
+        / f"saes/roneneldan/TinyStories-1M/sequence-length/{seq_len}/analysis.db"
     )
-    output_dir.mkdir(parents=True, exist_ok=True)
 
     dataset = load_from_disk(
         (root_dir / f"datasets/roneneldan/TinyStories_tokenized_{seq_len}").as_posix()
@@ -54,7 +54,7 @@ def main(root_dir, seq_len):
         dataset=dataset,  # type: ignore
         sae=sae,
         decode_fn=tokenizer.batch_decode,  # type: ignore
-        output_path=output_dir / "analysis.db",
+        output_path=output_path,
     )
 
 

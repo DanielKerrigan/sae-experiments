@@ -38,8 +38,7 @@ def main(root_dir, k):
         root_dir / f"saes/roneneldan/TinyStories-1M/sparsity/{k}/sae.pt", cfg.device
     )
 
-    output_dir = root_dir / f"saes/roneneldan/TinyStories-1M/sparsity/{k}/analysis"
-    output_dir.mkdir(parents=True, exist_ok=True)
+    output_path = root_dir / f"saes/roneneldan/TinyStories-1M/sparsity/{k}/analysis.db"
 
     dataset = load_from_disk(
         (root_dir / "datasets/roneneldan/TinyStories_tokenized_128").as_posix()
@@ -51,7 +50,7 @@ def main(root_dir, k):
         dataset=dataset,  # type: ignore
         sae=sae,
         decode_fn=tokenizer.batch_decode,  # type: ignore
-        output_path=output_dir / "analysis.db",
+        output_path=output_path,
     )
 
 

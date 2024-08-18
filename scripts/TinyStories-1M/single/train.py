@@ -55,10 +55,10 @@ def main(root_dir):
     model.to(cfg.device)
 
     dataset = load_from_disk(
-        (root_dir / f"datasets/roneneldan/TinyStories_tokenized_128").as_posix()
+        (root_dir / "datasets/roneneldan/TinyStories_tokenized_128").as_posix()
     )
 
-    output_dir = root_dir / f"saes/roneneldan/TinyStories-1M/single"
+    output_dir = root_dir / "saes/roneneldan/TinyStories-1M/single"
     output_dir.mkdir(parents=True, exist_ok=True)
 
     train(

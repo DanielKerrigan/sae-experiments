@@ -1,2 +1,40 @@
+[project]
+authors = [{ name = "DanielKerrigan", email = "d.kerrigan111@gmail.com" }]
+description = "Sparse autoencoder experiments"
+name = "lib"
+requires-python = ">= 3.10"
+version = "0.1.0"
+dependencies = [
+    "saefarer @ git+https://github.com/DanielKerrigan/saefarer.git",
+    "jupyterlab>=4.2.5,<5",
+    "transformer-lens>=2.8.0,<3",
+    "sae-lens>=4.0.6,<5",
+    "datasets>=2.21.0,<3",
+    "transformers>=4.45.2,<5",
+    "torch>=2.5.0,<3", "altair[all]>=5.4.1,<6", "polars>=1.11.0,<2", "annoy>=1.17.3,<2",
+]
+
+[build-system]
+build-backend = "hatchling.build"
+requires = ["hatchling"]
+
+[tool.hatch.metadata]
+allow-direct-references = true
+
+[tool.pixi.project]
+channels = ["conda-forge"]
+platforms = ["osx-arm64"]
+
+[tool.pixi.pypi-dependencies]
+lib = { path = ".", editable = true }
+
+[tool.pixi.tasks]
+
+[tool.pixi.dependencies]
+python = "3.10.*"
+nodejs = ">=22.9.0,<23"
+ruff = ">=0.7.0,<0.8"
+openpyxl = ">=3.1.5,<4"
+
 [tool.ruff]
 extend-include = ["*.ipynb"]

@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-rsync -av kerrigan.d@xfer.discovery.neu.edu:/scratch/kerrigan.d/mi/sae-experiments/saes .
+rsync -av kerrigan.d@xfer.discovery.neu.edu:/work/vis/users/kerrigan.d/mi/sae-experiments .

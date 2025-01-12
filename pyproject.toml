@@ -11,7 +11,10 @@ dependencies = [
     "sae-lens>=4.0.6,<5",
     "datasets>=2.21.0,<3",
     "transformers>=4.45.2,<5",
-    "torch>=2.5.0,<3", "altair[all]>=5.4.1,<6", "polars>=1.11.0,<2", "annoy>=1.17.3,<2",
+    "torch>=2.5.0,<3",
+    "altair[all]>=5.4.1,<6",
+    "polars>=1.11.0,<2",
+    "annoy>=1.17.3,<2",
 ]
 
 [build-system]
@@ -23,7 +26,7 @@ allow-direct-references = true
 
 [tool.pixi.project]
 channels = ["conda-forge"]
-platforms = ["osx-arm64"]
+platforms = ["osx-arm64", "linux-64"]
 
 [tool.pixi.pypi-dependencies]
 lib = { path = ".", editable = true }

@@ -1035,6 +1035,8 @@ packages:
   md5: fc6948412dbbbe9a4c9ddbbcfe0a79ab
   depends:
   - __osx >=11.0
+  arch: arm64
+  platform: osx
   license: bzip2-1.0.6
   license_family: BSD
   purls: []
@@ -1052,6 +1054,8 @@ packages:
 - conda: https://conda.anaconda.org/conda-forge/osx-arm64/ca-certificates-2024.12.14-hf0a4a13_0.conda
   sha256: 256be633fd0882ccc1a7a32bc278547e1703f85082c0789a87a603ee3ab8fb82
   md5: 7cb381a6783d91902638e4ed1ebd478e
+  arch: arm64
+  platform: osx
   license: ISC
   purls: []
   size: 157091
@@ -1850,6 +1854,8 @@ packages:
   md5: 5eb22c1d7b3fc4abb50d92d621583137
   depends:
   - __osx >=11.0
+  arch: arm64
+  platform: osx
   license: MIT
   license_family: MIT
   purls: []
@@ -2409,28 +2415,13 @@ packages:
   purls: []
   size: 669211
   timestamp: 1729655358674
-- pypi: .
-  name: lib
-  version: 0.1.0
-  sha256: bc750858bdff2cf8e038cd1f807177d2d7e85307709b90b5d9833ad57ce589ab
-  requires_dist:
-  - saefarer @ git+https://github.com/DanielKerrigan/saefarer.git
-  - jupyterlab>=4.2.5,<5
-  - transformer-lens>=2.8.0,<3
-  - sae-lens>=4.0.6,<5
-  - datasets>=2.21.0,<3
-  - transformers>=4.45.2,<5
-  - torch>=2.5.0,<3
-  - altair[all]>=5.4.1,<6
-  - polars>=1.11.0,<2
-  - annoy>=1.17.3,<2
-  requires_python: '>=3.10'
-  editable: true
 - conda: https://conda.anaconda.org/conda-forge/osx-arm64/libcxx-19.1.6-ha82da77_1.conda
   sha256: 2b2443404503cd862385fd2f2a2c73f9624686fd1e5a45050b4034cfc06904ec
   md5: ce5252d8db110cdb4ae4173d0a63c7c5
   depends:
   - __osx >=11.0
+  arch: arm64
+  platform: osx
   license: Apache-2.0 WITH LLVM-exception
   license_family: Apache
   purls: []
@@ -2451,6 +2442,8 @@ packages:
 - conda: https://conda.anaconda.org/conda-forge/osx-arm64/libffi-3.4.2-h3422bc3_5.tar.bz2
   sha256: 41b3d13efb775e340e4dba549ab5c029611ea6918703096b2eaa9c015c0750ca
   md5: 086914b672be056eb70fd4285b6783b6
+  arch: arm64
+  platform: osx
   license: MIT
   license_family: MIT
   purls: []
@@ -2513,6 +2506,8 @@ packages:
   md5: b2553114a7f5e20ccd02378a77d836aa
   depends:
   - __osx >=11.0
+  arch: arm64
+  platform: osx
   license: 0BSD
   purls: []
   size: 99129
@@ -2548,6 +2543,8 @@ packages:
   depends:
   - __osx >=11.0
   - libzlib >=1.3.1,<2.0a0
+  arch: arm64
+  platform: osx
   license: Unlicense
   purls: []
   size: 850553
@@ -2606,6 +2603,8 @@ packages:
   md5: 4bc348e3a1a74d20a3f9beb866d75e0a
   depends:
   - __osx >=11.0
+  arch: arm64
+  platform: osx
   license: MIT
   license_family: MIT
   purls: []
@@ -2644,6 +2643,8 @@ packages:
   - __osx >=11.0
   constrains:
   - zlib 1.3.1 *_2
+  arch: arm64
+  platform: osx
   license: Zlib
   license_family: Other
   purls: []
@@ -2986,6 +2987,8 @@ packages:
   md5: f6f7c5b7d0983be186c46c4f6f8f9af8
   depends:
   - __osx >=11.0
+  arch: arm64
+  platform: osx
   license: X11 AND BSD-3-Clause
   purls: []
   size: 796754
@@ -3086,6 +3089,8 @@ packages:
   - libzlib >=1.3.1,<2.0a0
   - openssl >=3.4.0,<4.0a0
   - zlib
+  arch: arm64
+  platform: osx
   license: MIT
   license_family: MIT
   purls: []
@@ -3220,6 +3225,8 @@ packages:
   - python >=3.10,<3.11.0a0
   - python >=3.10,<3.11.0a0 *_cpython
   - python_abi 3.10.* *_cp310
+  arch: arm64
+  platform: osx
   license: MIT
   license_family: MIT
   purls:
@@ -3246,6 +3253,8 @@ packages:
   depends:
   - __osx >=11.0
   - ca-certificates
+  arch: arm64
+  platform: osx
   license: Apache-2.0
   license_family: Apache
   purls: []
@@ -3999,6 +4008,8 @@ packages:
   - tzdata
   constrains:
   - python_abi 3.10.* *_cp310
+  arch: arm64
+  platform: osx
   license: Python-2.0
   purls: []
   size: 12372048
@@ -4063,6 +4074,8 @@ packages:
   md5: e33836c9096802b29d28981765becbee
   constrains:
   - python 3.10.* *_cpython
+  arch: arm64
+  platform: osx
   license: BSD-3-Clause
   license_family: BSD
   purls: []
@@ -4114,6 +4127,8 @@ packages:
   md5: 8cbb776a2f641b943d413b3e19df71f4
   depends:
   - ncurses >=6.3,<7.0a0
+  arch: arm64
+  platform: osx
   license: GPL-3.0-only
   license_family: GPL
   purls: []
@@ -4211,6 +4226,8 @@ packages:
   - python_abi 3.10.* *_cp310
   constrains:
   - __osx >=11.0
+  arch: arm64
+  platform: osx
   license: MIT
   license_family: MIT
   purls:
@@ -4243,6 +4260,23 @@ packages:
   - typing-extensions>=4.10.0,<5.0.0
   - zstandard>=0.22.0,<0.23.0
   requires_python: '>=3.10,<4.0'
+- pypi: .
+  name: saeexperiments
+  version: 0.1.0
+  sha256: c138551e3712441c3233b99587e4d9de8ac492d86ec993814103b4931821b6af
+  requires_dist:
+  - saefarer @ git+https://github.com/DanielKerrigan/saefarer.git
+  - jupyterlab>=4.2.5,<5
+  - transformer-lens>=2.8.0,<3
+  - sae-lens>=4.0.6,<5
+  - datasets>=2.21.0,<3
+  - transformers>=4.45.2,<5
+  - torch>=2.5.0,<3
+  - altair[all]>=5.4.1,<6
+  - polars>=1.11.0,<2
+  - annoy>=1.17.3,<2
+  requires_python: '>=3.10'
+  editable: true
 - pypi: git+https://github.com/DanielKerrigan/saefarer.git@41b5c6789952310f515c461804f12e1dfd1fd32d
   name: saefarer
   version: 0.0.0
@@ -4898,6 +4932,8 @@ packages:
   md5: b50a57ba89c32b62428b71a875291c9b
   depends:
   - libzlib >=1.2.13,<2.0.0a0
+  arch: arm64
+  platform: osx
   license: TCL
   license_family: BSD
   purls: []
@@ -5857,6 +5893,8 @@ packages:
   depends:
   - __osx >=11.0
   - libzlib 1.3.1 h8359307_2
+  arch: arm64
+  platform: osx
   license: Zlib
   license_family: Other
   purls: []

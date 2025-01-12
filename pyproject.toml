@@ -1,7 +1,7 @@
 [project]
 authors = [{ name = "DanielKerrigan", email = "d.kerrigan111@gmail.com" }]
 description = "Sparse autoencoder experiments"
-name = "lib"
+name = "saeexperiments"
 requires-python = ">= 3.10"
 version = "0.1.0"
 dependencies = [
@@ -29,7 +29,7 @@ channels = ["conda-forge"]
 platforms = ["osx-arm64", "linux-64"]
 
 [tool.pixi.pypi-dependencies]
-lib = { path = ".", editable = true }
+saeexperiments = { path = ".", editable = true }
 
 [tool.pixi.tasks]
 

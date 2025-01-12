@@ -14,7 +14,7 @@ dependencies = [
     "torch>=2.5.0,<3",
     "altair[all]>=5.4.1,<6",
     "polars>=1.11.0,<2",
-    "annoy>=1.17.3,<2",
+    "openpyxl>=3.1.5,<4",
 ]
 
 [build-system]
@@ -33,11 +33,15 @@ saeexperiments = { path = ".", editable = true }
 
 [tool.pixi.tasks]
 
+[tool.pixi.system-requirements]
+linux = "3.10.0"
+libc = { family="glibc", version="2.17" }
+
 [tool.pixi.dependencies]
 python = "3.10.*"
-nodejs = ">=22.9.0,<23"
+# nodejs = ">=22.9.0,<23"
+nodejs = ">=17.9.1,<23"
 ruff = ">=0.7.0,<0.8"
-openpyxl = ">=3.1.5,<4"
 
 [tool.ruff]
 extend-include = ["*.ipynb"]

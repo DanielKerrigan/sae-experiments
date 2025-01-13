@@ -21,7 +21,7 @@ tokenized_dataset = dataset.map(
     batched=True,
     num_proc=8,
 )
-tokenized_dataset.set_format(type="torch", columns=["input_ids"])
+tokenized_dataset.set_format(type="torch")
 
 
 tokenized_dataset.save_to_disk("../datasets/ElKulako/stocktwits-crypto_tokenized")

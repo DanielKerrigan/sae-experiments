@@ -6,6 +6,7 @@
 scratch
 .vscode
 .DS_Store
+/output
 
 # pixi environments
 .pixi

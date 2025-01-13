@@ -39,7 +39,7 @@ def main(root_dir):
         beta2=0.999,
         eps=6.25e-10,
         # training
-        total_training_tokens=200_000_000,
+        total_training_tokens=30_000 * 4096,
         # logging
         logger="wandb",
         log_batch_freq=500,

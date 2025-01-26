@@ -6,15 +6,15 @@ requires-python = ">= 3.10"
 version = "0.1.0"
 dependencies = [
     "saefarer @ git+https://github.com/DanielKerrigan/saefarer.git",
-    "jupyterlab>=4.2.5,<5",
-    "transformer-lens>=2.8.0,<3",
-    "sae-lens>=4.0.6,<5",
-    "datasets>=2.21.0,<3",
-    "transformers>=4.45.2,<5",
-    "torch>=2.5.0,<3",
-    "altair[all]>=5.4.1,<6",
-    "polars>=1.11.0,<2",
-    "openpyxl>=3.1.5,<4",
+    "jupyterlab==4.3.4",
+    "transformer-lens==2.11.0",
+    "sae-lens==5.3.3",
+    "datasets==2.21.0",
+    "transformers==4.48.1",
+    "torch==2.5.1",
+    "altair[all]==5.5.0",
+    "polars==1.21.0",
+    "openpyxl==3.1.5",
 ]
 
 [build-system]
@@ -35,13 +35,12 @@ saeexperiments = { path = ".", editable = true }
 
 [tool.pixi.system-requirements]
 linux = "3.10.0"
-libc = { family="glibc", version="2.17" }
+libc = { family = "glibc", version = "2.17" }
 
 [tool.pixi.dependencies]
 python = "3.10.*"
-# nodejs = ">=22.9.0,<23"
-nodejs = ">=17.9.1,<23"
-ruff = ">=0.7.0,<0.8"
+nodejs = ">=22.6.0,<22.14"
+ruff = ">=0.9.3,<0.10"
 
 [tool.ruff]
 extend-include = ["*.ipynb"]

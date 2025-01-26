@@ -6,7 +6,6 @@ dataset = load_from_disk("../datasets/ElKulako/stocktwits-crypto")
 
 model_name = "ElKulako/cryptobert"
 
-
 tokenizer = AutoTokenizer.from_pretrained(model_name, use_fast=True)
 
 

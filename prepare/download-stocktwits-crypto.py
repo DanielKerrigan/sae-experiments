@@ -1,6 +1,6 @@
 import pandas as pd
 
-from datasets import ClassLabel, Dataset, Features, Value
+from datasets import ClassLabel, Dataset, DatasetDict, Features, Value
 
 sheet_to_df = pd.read_excel(
     "https://huggingface.co/datasets/ElKulako/stocktwits-crypto/resolve/main/st-data-full.xlsx",
@@ -19,4 +19,18 @@ features = Features({"text": Value("string"), "label": ClassLabel(names=class_na
 
 dataset = Dataset.from_pandas(df, features=features, preserve_index=False)
 
-dataset.save_to_disk("../datasets/ElKulako/stocktwits-crypto")
+# https://stackoverflow.com/a/76218276/5016634
+train_testvalid = dataset.train_test_split(train_size=0.8, shuffle=True, seed=1)
+test_valid = train_testvalid["test"].train_test_split(
+    train_size=0.5, shuffle=True, seed=2
+)
+
+dataset_dict = DatasetDict(
+    {
+        "train": train_testvalid["train"],
+        "validation": test_valid["train"],
+        "test": test_valid["test"],
+    }
+)
+
+dataset_dict.save_to_disk("../datasets/ElKulako/stocktwits-crypto")

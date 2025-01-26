@@ -13,11 +13,16 @@ def main(root_dir):
 
     root_dir = Path(root_dir)
 
+    dataset = load_from_disk(
+        (root_dir / "datasets/ElKulako/stocktwits-crypto_tokenized/train").as_posix()
+    )
+
     cfg = TrainingConfig(
         device="cuda",
         dtype="float32",
         # dataset
         dataset_column="input_ids",
+        attn_mask_column="attention_mask",
         # dimensions
         d_in=768,
         expansion_factor=4,
@@ -39,7 +44,7 @@ def main(root_dir):
         beta2=0.999,
         eps=6.25e-10,
         # training
-        total_training_tokens=30_000 * 4096,
+        total_training_tokens=dataset.shape[0] * 128,  # 136M
         # logging
         logger="wandb",
         log_batch_freq=500,
@@ -47,6 +52,8 @@ def main(root_dir):
         wandb_group="cryptobert",
         wandb_name="Initial",
         wandb_notes="Initial SAE training for cryptobert.",
+        # checkpointing
+        checkpoint_batch_freq=10_000,
     )
 
     model_name = "ElKulako/cryptobert"
@@ -54,12 +61,10 @@ def main(root_dir):
     model = AutoModelForSequenceClassification.from_pretrained(model_name)
     model.to(cfg.device)
 
-    dataset = load_from_disk(
-        (root_dir / "datasets/ElKulako/stocktwits-crypto_tokenized").as_posix()
-    )
-
     output_dir = root_dir / f"saes/{model_name}"
-    output_dir.mkdir(parents=True, exist_ok=True)
+    checkpoint_dir = root_dir / f"saes/{model_name}/checkpoints"
+
+    checkpoint_dir.mkdir(parents=True, exist_ok=True)
 
     train(
         cfg=cfg,
@@ -67,6 +72,7 @@ def main(root_dir):
         dataset=dataset,  # type: ignore
         save_path=output_dir / "sae.pt",
         log_path=output_dir,
+        checkpoint_path=checkpoint_dir,
     )
 
 

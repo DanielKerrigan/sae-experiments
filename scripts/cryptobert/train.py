@@ -51,7 +51,7 @@ def main(root_dir):
         wandb_project="saefarer",
         wandb_group="cryptobert",
         wandb_name="Initial",
-        wandb_notes="Initial SAE training for cryptobert.",
+        wandb_notes="Initial SAE training for cryptobert for k=4.",
         # checkpointing
         checkpoint_batch_freq=10_000,
     )

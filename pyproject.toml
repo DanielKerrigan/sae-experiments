@@ -5,7 +5,7 @@ name = "saeexperiments"
 requires-python = ">= 3.10"
 version = "0.1.0"
 dependencies = [
-    "saefarer @ git+https://github.com/DanielKerrigan/saefarer.git",
+    "saefarer @ git+https://github.com/DanielKerrigan/saefarer.git@96b1620",
     "jupyterlab==4.3.4",
     "transformer-lens==2.11.0",
     "sae-lens==5.3.3",

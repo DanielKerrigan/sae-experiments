@@ -44,14 +44,14 @@ def main(root_dir):
         beta2=0.999,
         eps=6.25e-10,
         # training
-        total_training_tokens=dataset.shape[0] * 128,  # 136M
+        total_training_tokens=100_000_000,
         # logging
         logger="wandb",
         log_batch_freq=500,
         wandb_project="saefarer",
         wandb_group="cryptobert",
-        wandb_name="Initial",
-        wandb_notes="Initial SAE training for cryptobert for k=4.",
+        wandb_name="Iniital no pad",
+        wandb_notes="Initial SAE training for cryptobert for k=4, no padding tokens.",
         # checkpointing
         checkpoint_batch_freq=10_000,
     )
